@@ -11,4 +11,10 @@ public class StringCalculatorTest {
         assertEquals(0, calculator.add(""));
     }
 
+    @Test
+    void testSingleStringValueShouldGiveSameValue(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(1, calculator.add("1"));
+    }
+
 }
