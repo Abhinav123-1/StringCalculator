@@ -29,4 +29,10 @@ public class StringCalculatorTest {
         assertEquals(6,calculator.add("1,2,3"));
     }
 
+    @Test
+    void testNewlineDelimiters() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("1\n2,3"));
+    }
+
 }
