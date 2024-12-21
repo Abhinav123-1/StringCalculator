@@ -1,50 +1,57 @@
 package com.project.stringcalculator.service;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
+    StringCalculator stringCalculator;
+
+    @BeforeEach
+    void setUp() {
+         stringCalculator = new StringCalculator();
+    }
+
+    @AfterEach
+    public void destroy() {
+        stringCalculator = null;
+    }
+
     @Test
     void testEmptyStringValueShouldGiveZero(){
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(0, calculator.add(""));
+        assertEquals(0, stringCalculator.add(""));
     }
 
     @Test
     void testSingleStringValueShouldGiveSameValue(){
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(1, calculator.add("1"));
+        assertEquals(1, stringCalculator.add("1"));
     }
 
     @Test
     void testTwoValuesShouldGiveTheSum(){
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(3,calculator.add("1,2"));
+        assertEquals(3,stringCalculator.add("1,2"));
     }
 
     @Test
     void testMultipleValuesShouldGiveTheSumOfValues(){
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(6,calculator.add("1,2,3"));
+        assertEquals(6,stringCalculator.add("1,2,3"));
     }
 
     @Test
     void testNewlineDelimiters() {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(6, calculator.add("1\n2,3"));
+        assertEquals(6, stringCalculator.add("1\n2,3"));
     }
 
     @Test
     void testCustomDelimiters() {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(3, calculator.add("//;\n1;2"));
+        assertEquals(3, stringCalculator.add("//;\n1;2"));
     }
 
     @Test
     void testNegativeNumbers() {
-        StringCalculator calculator = new StringCalculator();
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.add("1,-2,3,-4"));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> stringCalculator.add("1,-2,3,-4"));
         assertEquals("Negatives not allowed: -2 -4", exception.getMessage());
     }
 
