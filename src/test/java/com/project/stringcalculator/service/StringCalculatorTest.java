@@ -38,7 +38,7 @@ public class StringCalculatorTest {
     @Test
     void testCustomDelimiters() {
         StringCalculator calculator = new StringCalculator();
-        assertEquals(6, calculator.add("//;\\n1;2"));
+        assertEquals(3, calculator.add("//;\\n1;2"));
     }
 
 }
