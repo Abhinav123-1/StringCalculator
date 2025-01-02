@@ -4,13 +4,14 @@ public class StringCalculator {
 
     private static final String NEW_LINE = "\n";
     private static final String SPACE = " ";
+    private static final String CUSTOM_DELIMETER = "//";
 
     public int add(String numbers) {
         if (numbers.isEmpty()) {
             return 0;
         }
         String delimiter = "[,\n]";
-        if (numbers.startsWith("//")) {
+        if (numbers.startsWith(CUSTOM_DELIMETER)) {
             int delimiterIndex = numbers.indexOf(NEW_LINE);
             delimiter = numbers.substring(2, delimiterIndex);
             numbers = numbers.substring(delimiterIndex + 1);
