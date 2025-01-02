@@ -27,15 +27,9 @@ public class StringCalculator {
     }
 
     private void validateNumbers(String[] numbers) {
-        List<Integer> negativeNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            int num = Integer.parseInt(number);
-            if (num < 0) {
-                negativeNumbers.add(num);
-            }
-        }
+        List<Integer> negativeNumbers = Arrays.stream(numbers).map(Integer::parseInt).filter(m -> m < 0).toList();
         if (!negativeNumbers.isEmpty()) {
-            throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers.stream().map(m -> m.toString()).collect(Collectors.joining(" ")));
+            throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers.stream().map(Object::toString).collect(Collectors.joining(" ")));
         }
     }
 
