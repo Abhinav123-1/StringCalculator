@@ -1,6 +1,7 @@
 package com.project.stringcalculator.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +22,8 @@ public class StringCalculator {
             numbers = numbers.substring(delimiterIndex + 1);
         }
         String[] numbersArray = numbers.split(delimiter);
-        int sum = 0;
         validateNumbers(numbersArray);
-        for (String number : numbersArray) {
-            int num = Integer.parseInt(number);
-            sum += num;
-        }
-        return sum;
+        return Arrays.stream(numbersArray).mapToInt(Integer::parseInt).sum();
     }
 
     private void validateNumbers(String[] numbers) {
