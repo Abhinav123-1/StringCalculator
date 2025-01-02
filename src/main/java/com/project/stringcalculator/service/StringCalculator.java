@@ -1,5 +1,9 @@
 package com.project.stringcalculator.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringCalculator {
 
     private static final String NEW_LINE = "\n";
@@ -18,21 +22,25 @@ public class StringCalculator {
         }
         String[] numbersArray = numbers.split(delimiter);
         int sum = 0;
-        StringBuilder negatives = new StringBuilder();
-
+        validateNumbers(numbersArray);
         for (String number : numbersArray) {
             int num = Integer.parseInt(number);
-            if (num < 0) {
-                negatives.append(num).append(SPACE);
-            } else {
-                sum += num;
-            }
-        }
-
-        if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("Negatives not allowed: " + negatives.toString().trim());
+            sum += num;
         }
         return sum;
+    }
+
+    private void validateNumbers(String[] numbers) {
+        List<Integer> negativeNumbers = new ArrayList<>();
+        for (String number : numbers) {
+            int num = Integer.parseInt(number);
+            if (num < 0) {
+                negativeNumbers.add(num);
+            }
+        }
+        if (!negativeNumbers.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers.stream().map(m -> m.toString()).collect(Collectors.joining(" ")));
+        }
     }
 
 }
